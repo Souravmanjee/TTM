@@ -8,7 +8,7 @@ import { useAuthStore } from '@/stores/authStore';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import { statusLabels, getInitials } from '@/lib/utils';
 
-const containerVariants = {
+const containerVariants: any = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -16,7 +16,7 @@ const containerVariants = {
   }
 };
 
-const cardVariants = {
+const cardVariants: any = {
   hidden: { opacity: 0, y: 20, scale: 0.95 },
   visible: { 
     opacity: 1, 
@@ -163,12 +163,12 @@ export default function DashboardPage() {
                       <div className="w-24 h-1.5 rounded-full bg-white/5 overflow-hidden">
                         <motion.div 
                           initial={{ width: 0 }}
-                          animate={{ width: `${Math.round((p.taskCounts?.completed / p.taskCounts?.total) * 100) || 0}%` }}
+                          animate={{ width: `${Math.round(((p.taskCounts?.completed || 0) / (p.taskCounts?.total || 1)) * 100) || 0}%` }}
                           className="h-full bg-gradient-to-r from-indigo-500 to-purple-500"
                         />
                       </div>
                       <span className="text-xs font-black text-indigo-400 w-8 text-right">
-                        {Math.round((p.taskCounts?.completed / p.taskCounts?.total) * 100) || 0}%
+                        {Math.round(((p.taskCounts?.completed || 0) / (p.taskCounts?.total || 1)) * 100) || 0}%
                       </span>
                     </div>
                   </div>

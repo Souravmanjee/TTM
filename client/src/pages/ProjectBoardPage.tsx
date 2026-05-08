@@ -34,7 +34,7 @@ const iconColors: Record<string, string> = {
   'completed': 'text-emerald-400',
 };
 
-const containerVariants = {
+const containerVariants: any = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -77,8 +77,9 @@ export default function ProjectBoardPage() {
     }
   };
 
-  const isProjectAdmin = currentProject?.owner?._id === user?.id || 
-    currentProject?.members.some(m => m.user._id === user?.id && m.role === 'admin') ||
+  const isProjectAdmin = currentProject?.owner?._id === user?._id || 
+    currentProject?.owner?.id === user?.id ||
+    currentProject?.members.some(m => (m.user._id === user?._id || m.user.id === user?.id) && m.role === 'admin') ||
     user?.role === 'admin';
 
   const handleCreate = async (e: React.FormEvent) => {
